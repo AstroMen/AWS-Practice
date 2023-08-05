@@ -5,7 +5,7 @@ import re
 from urllib.parse import unquote_plus
 
 
-def lambda_handler(event, context):
+def demo1_json_to_csv_converter(event, context):
     ''' File Conversion Service '''
     s3_client = boto3.client('s3')
     bucket = event['Records'][0]['s3']['bucket']['name']
@@ -30,7 +30,7 @@ def lambda_handler(event, context):
     s3_client.upload_file(local_csv_file, bucket, key.replace('.json', '.csv'))
 
 
-def lambda_handler(event, context):
+def demo2_automatic_ec2_scaling(event, context):
     ''' Automatic EC2 Instance Scaling '''
     client = boto3.client('cloudwatch')
     ec2 = boto3.resource('ec2')
@@ -66,7 +66,7 @@ def lambda_handler(event, context):
         instance.stop()
 
 
-def lambda_handler(event, context):
+def demo3_automated_log_analysis(event, context):
     ''' Automated Log Analysis '''
     log_group = event['logGroup']
     pattern = 'ERROR'
@@ -89,7 +89,7 @@ def lambda_handler(event, context):
         )
 
 
-def lambda_handler(event, context):
+def demo4_real_time_data_processing(event, context):
     ''' Real-time Data Processing '''
     for record in event['Records']:
         payload = json.loads(record['kinesis']['data'])
@@ -99,7 +99,7 @@ def lambda_handler(event, context):
         store_data(processed_data)
 
 
-def lambda_handler(event, context):
+def demo5_automated_deployment_pipeline(event, context):
     ''' Automated Deployment Pipeline '''
     codebuild = boto3.client('codebuild')
     codedeploy = boto3.client('codedeploy')
@@ -124,7 +124,7 @@ def lambda_handler(event, context):
     )
 
 
-def lambda_handler(event, context):
+def demo6_periodic_database_backup(event, context):
     ''' Periodic Database Backup '''
     rds_client = boto3.client('rds')
     snapshot_id = 'snapshot-' + context.aws_request_id
@@ -138,7 +138,7 @@ def lambda_handler(event, context):
 from PIL import Image
 from io import BytesIO
 
-def lambda_handler(event, context):
+def demo7_image_processing(event, context):
     ''' Automated Image Processing '''
     s3_client = boto3.client('s3')
     bucket = event['Records'][0]['s3']['bucket']['name']
@@ -156,7 +156,7 @@ def lambda_handler(event, context):
     s3_client.put_object(Bucket=bucket, Key=key, Body=buffer.getvalue())
 
 
-def lambda_handler(event, context):
+def demo8_content_recommendation(event, context):
     ''' Intelligent Content Recommendation '''
     user_id = event['user_id']
     personalize = boto3.client('personalize-runtime')
@@ -172,7 +172,7 @@ def lambda_handler(event, context):
 
 from sklearn.externals import joblib
 
-def lambda_handler(event, context):
+def demo9_fraud_detection(event, context):
     ''' Real-time Financial Fraud Detection '''
     transaction = event['transaction']
     model_path = '/tmp/model.pkl'
@@ -189,7 +189,7 @@ def lambda_handler(event, context):
         handle_fraud(transaction)
 
 
-def lambda_handler(event, context):
+def demo10_user_auth(event, context):
     ''' User Authentication and Authorization Flow '''
     user = event['user']
     password = event['password']
