@@ -4,5 +4,5 @@
 AWS_Common_Services_Cheatsheet.md
 
 ## AWS Lambda demo
-Code: lambda_demo.py
+Code: lambda_handler.py  
 Scenario description: lambda_demo.md
