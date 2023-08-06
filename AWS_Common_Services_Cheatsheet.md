@@ -103,6 +103,9 @@ aws rds modify-db-instance --db-instance-identifier MyDBInstance --db-instance-c
 aws rds reboot-db-instance --db-instance-identifier MyDBInstance
 ```
 
+RDS supports several types of databases, including MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora.  
+As with Amazon Redshift, interacting with the data stored in an Amazon RDS instance is typically done through SQL commands run within a SQL client connected to your RDS instance. These commands are the same standard SQL commands used to interact with any relational database.  
+
 #### Amazon Redshift
 ```bash
 # Create a cluster
