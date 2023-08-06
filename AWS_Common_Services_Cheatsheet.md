@@ -103,7 +103,37 @@ aws rds modify-db-instance --db-instance-identifier MyDBInstance --db-instance-c
 aws rds reboot-db-instance --db-instance-identifier MyDBInstance
 ```
 
+#### Amazon Redshift
+```bash
+# Create a cluster
+aws redshift create-cluster --cluster-identifier my-cluster --master-username my-username --master-user-password my-password --node-type dc2.large --cluster-type single-node
+
+# Describe clusters
+aws redshift describe-clusters
+
+# Delete a cluster
+aws redshift delete-cluster --cluster-identifier my-cluster --skip-final-cluster-snapshot
+```
+
+SQL commands should be run within a SQL client connected to your Redshift cluster.  
+If you need to perform operations on the Amazon Redshift cluster itself like creating, resizing, deleting, or otherwise managing the cluster, you would use the AWS CLI or SDKs, or the AWS Management Console.
+
 ### 4. Networking and Content Delivery
+
+#### Amazon CloudFront
+```bash
+# Create a distribution
+aws cloudfront create-distribution --origin-domain-name mybucket.s3.amazonaws.com
+
+# List distributions
+aws cloudfront list-distributions
+
+# Update a distribution
+aws cloudfront update-distribution --id YOUR_DISTRIBUTION_ID --distribution-config file://config.json
+
+# Delete a distribution
+aws cloudfront delete-distribution --id YOUR_DISTRIBUTION_ID --if-match YOUR_ETAG
+```
 
 #### VPC (Virtual Private Cloud)
 ```bash
@@ -146,6 +176,30 @@ aws emr list-clusters --active
 
 # Terminate clusters
 aws emr terminate-clusters --cluster-ids j-EXAMPLE
+```
+
+#### Amazon Athena
+```bash
+# Start a query execution
+aws athena start-query-execution --query-string "SELECT * FROM mytable" --result-configuration "OutputLocation=s3://mybucket/path/"
+
+# Get query execution
+aws athena get-query-execution --query-execution-id YOUR_QUERY_EXECUTION_ID
+```
+
+#### AWS Glue
+```bash
+# Create a crawler
+aws glue create-crawler --name my-crawler --role Glue_ServiceRole --database-name my-db --table-prefix my-prefix --targets "S3Targets=[{Path=s3://mybucket/mypath}]" --schedule cron(0/15 * 1/1 * ? *)
+
+# Start a crawler
+aws glue start-crawler --name my-crawler
+
+# Get all crawlers
+aws glue get-crawlers
+
+# Delete a crawler
+aws glue delete-crawler --name my-crawler
 ```
 
 ### 7. Machine Learning Services
