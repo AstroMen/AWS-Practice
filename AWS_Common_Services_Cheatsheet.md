@@ -48,10 +48,19 @@ aws s3 mb s3://my-bucket
 # List S3 buckets
 aws s3 ls
 
-# Copy a file to an S3 bucket
+# Upload a file to an S3 bucket
 aws s3 cp myfile.txt s3://my-bucket/myfile.txt
 
+# Download a file from an S3 bucket
+aws s3 cp s3://my-bucket/my-file.txt my-file.txt
+
+# Delete a file from a bucket
+aws s3 rm s3://my-bucket/my-file.txt
+
 # Delete an S3 bucket
+aws s3 rb s3://my-bucket
+
+# Delete a bucket and all its contents
 aws s3 rb s3://my-bucket --force
 
 # Sync a directory with an S3 bucket
@@ -60,6 +69,19 @@ aws s3 sync my-folder s3://my-bucket
 # Enable versioning on an S3 bucket
 aws s3api put-bucket-versioning --bucket my-bucket --versioning-configuration Status=Enabled
 ```
+
+Amazon S3 Select and Amazon S3 Glacier Select are features designed to retrieve only a subset of data from an object by using simple SQL expressions. It's used to filter and retrieve specific data instead of retrieving the entire object.  
+```bash
+aws s3api select-object-content \
+    --bucket my-bucket \
+    --key my-object-key \
+    --expression "SELECT * FROM S3Object s where s.age > 20" \
+    --expression-type 'SQL' \
+    --input-serialization '{"CSV": {"FileHeaderInfo": "Use"}}' \
+    --output-serialization '{"CSV": {}}' query-results.csv
+```
+Here, my-bucket is the name of your S3 bucket and my-object-key is the key of the S3 object you wish to query. The expression is your SQL query, and the input-serialization and output-serialization parameters specify the format of the input and output data respectively.  
+Please note that S3 Select supports CSV, JSON, and Parquet formats. For JSON and Parquet, the syntax and the input-serialization and output-serialization will differ.
 
 ### 3. Database Services
 
