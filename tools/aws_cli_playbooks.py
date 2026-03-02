@@ -23,6 +23,11 @@ PLAYBOOKS = {
         "aws dynamodb describe-table --table-name <table> --region <region>",
         "aws dynamodb scan --table-name <table> --limit 10 --region <region>",
     ],
+    "elbv2": [
+        "aws elbv2 describe-load-balancers --region <region>",
+        "aws elbv2 describe-target-groups --region <region>",
+        "aws elbv2 describe-target-health --target-group-arn <tg-arn> --region <region>",
+    ],
     "cloudwatch": [
         "aws cloudwatch list-metrics --namespace AWS/EC2 --region <region>",
         "aws logs describe-log-groups --region <region>",

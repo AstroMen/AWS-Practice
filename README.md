@@ -60,3 +60,20 @@ Besides Lambda-specific helpers, there are now lightweight utilities for common 
    python tools/aws_arn_tool.py build --service s3 --resource my-bucket
    ```
 
+
+3. `tools/s3_inventory_summary.py`  
+   Summarize `aws s3api list-objects-v2` JSON output: object count, total size, common extensions, and largest objects.
+
+   ```bash
+   aws s3api list-objects-v2 --bucket <bucket> --output json > s3-list.json
+   python tools/s3_inventory_summary.py --input s3-list.json --top 10
+   ```
+
+4. `tools/elb_target_health_report.py`  
+   Summarize `aws elbv2 describe-target-health` JSON output: state distribution, reasons, and per-target details.
+
+   ```bash
+   aws elbv2 describe-target-health --target-group-arn <tg-arn> --output json > elb-health.json
+   python tools/elb_target_health_report.py --input elb-health.json
+   ```
+
